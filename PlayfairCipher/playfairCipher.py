@@ -63,10 +63,18 @@ def encrypt(*args, **kwargs):
         for j in range(5):
             row[i] += str[5 * i + j]
 
+    # Display 5x5 key table
+    table = ""
+    for i in range(5):
+        table += '|' + row[i] + '|' + '\n'
+
+    Element('keyTable').element.innerHTML = table
+
     print('array: ')
     for i in range(5):
         print('|' + row[i] + '|')
 
+    # Substitution
     shift = 1
     result = ''
     for i in range(0,  len(plainText), 2):
@@ -115,13 +123,15 @@ def encrypt(*args, **kwargs):
         if (i + 1) % 2 == 0:
             msg += ' '
 
+    Element('plainDigraph').element.innerHTML = msg
+
     finalResult = ''
     for i in range(len(result)):
         finalResult += result[i]
         if (i + 1) % 2 == 0:
             finalResult += ' '
 
-    Element('ciphertext').element.innerText = finalResult
+    Element('ciphertext').element.innerHTML = finalResult
 
     # return finalResult
 

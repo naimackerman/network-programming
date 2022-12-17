@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>Playfair cipher</title>
-    <!-- Bootscrap Core CSS and JS -->
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,19 +19,28 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
     <!-- Pyscript -->
     <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 
     <!-- style -->
     <style type="text/css">
+      * {
+        font-family: 'Yantramanav', sans-serif;
+      }
       th,
       td {
         padding: 10px;
       }
       textarea {
         resize: none;
-        font-family: monospace;
       }
     </style>
   </head>
@@ -40,23 +48,12 @@
   <body>
     <!-- nav bar begins -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
+      <div class="container-fluid ml-4" style="font-size: large">
         <a class="navbar-brand" href="#">KIJ</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link active" aria-current="page" href="#">Playfair Cipher</a>
-            <a class="nav-link" href="#">Other Cipher</a>
+            <a class="nav-link" href="#">Naim-Opi Cipher</a>
           </div>
         </div>
       </div>
@@ -64,9 +61,9 @@
     <!-- nav bar ends -->
 
     <!-- actual content -->
-    <div class="container mt-4">
+    <div class="container mt-4" style="font-size: 700">
       <div class="p-5 mb-4" style="background-color: antiquewhite; border-radius: 20px">
-        <h1>Playfair Cipher</h1>
+        <h1 style="font-weight: bold; font-size: xx-large">Playfair Cipher</h1>
         <br />
 
         <form id="myForm" method="post">
@@ -77,34 +74,14 @@
                 <label for="keyword">Keyword: </label>
               </td>
               <td>
-                <input
-                  type="text"
-                  name="keyword"
-                  id="keyword"
-                  size="50"
-                  onchange="Table.value=makeTableau(keyword.value)"
-                />
-              </td>
-            </tr>
-
-            <!-- Table -->
-            <tr>
-              <td><label for="Table">Table: </label></td>
-              <td>
-                <textarea
-                  style="font-family: monospace; font-size: 20px"
-                  rows="6"
-                  name="Table"
-                  cols="10"
-                  readonly
-                ></textarea>
+                <input type="text" name="keyword" id="keyword" size="50" />
               </td>
             </tr>
 
             <!-- get message -->
             <tr>
               <td><label for="message">Plaintext: </label></td>
-              <td><textarea rows="4" cols="25" name="plainText" id="plainText"></textarea></td>
+              <td><textarea rows="4" cols="50" name="plainText" id="plainText"></textarea></td>
             </tr>
 
             <!-- submit button -->
@@ -122,22 +99,31 @@
               <td></td>
             </tr>
 
+            <!-- Key Table -->
+            <tr>
+              <td><label for="keyTable">Table: </label></td>
+              <td>
+                <textarea
+                  style="font-family: monospace; font-size: 20px"
+                  rows="6"
+                  id="keyTable"
+                  name="keyTable"
+                  cols="10"
+                  readonly
+                ></textarea>
+              </td>
+            </tr>
+
             <tr>
               <td><label for="plainDigraphLabel">Plaintext Digraph: </label></td>
               <td>
-                <div id="plainDigraph" style="font-family: monospace"></div>
+                <div id="plainDigraph"></div>
               </td>
             </tr>
             <tr>
               <td><label for="resultantMsg">Ciphertext: </label></td>
               <td>
-                <div id="ciphertext" style="font-family: monospace"></div>
-              </td>
-            </tr>
-            <tr>
-              <td><label for="test">Test str: </label></td>
-              <td>
-                <div id="test" style="font-family: monospace"></div>
+                <div id="ciphertext"></div>
               </td>
             </tr>
           </table>
