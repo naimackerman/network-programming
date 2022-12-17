@@ -2,7 +2,10 @@ import re
 import math
 
 
-def encrypt(plainText, key):
+def encrypt(*args, **kwargs):
+    plainText = Element('plainText').element.value
+    key = Element('keyword').element.value
+
     alphabets = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
 
     # Make uppercase
@@ -30,15 +33,12 @@ def encrypt(plainText, key):
     if len(plainText) % 2 == 1:
         plainText += 'Z'
 
-    #   Handle letter J occurance in plainText
-    pos = plainText.find('J')
-    while pos > -1:
-        plainText = plainText[0:pos] + 'I' + plainText[pos+1, len(plainText)]
-        pos = plainText.find('J')
+    # Handle letter J occurance in plainText
+    plainText = plainText.replace('J', 'I')
 
     print('plaintext -> ', plainText)
     print('key -> ', key)
-    
+
     # Concat and remove duplicate letter
     str = key + alphabets
     for i in range(len(alphabets)):
@@ -101,12 +101,12 @@ def encrypt(plainText, key):
             temp = x1
             x1 = x2
             x2 = temp
-            
+
         # x1 = 3, y1 = 1
         # x2 = 2, y2 = 0
         # row[1][3] -> R
         # row[0][2] -> D
-        
+
         result += row[y1][x1] + row[y2][x2]
 
     msg = ''
@@ -121,15 +121,17 @@ def encrypt(plainText, key):
         if (i + 1) % 2 == 0:
             finalResult += ' '
 
-    return finalResult
+    Element('ciphertext').element.innerText = finalResult
+
+    # return finalResult
 
 
-print('~ Playfair Cipher Encryption ~')
-print('Input Key: ', end='')
-key = input()
-print('Input Plaintext: ', end='')
-plainText = input()
-print()
+# print('~ Playfair Cipher Encryption ~')
+# print('Input Key: ', end='')
+# key = input()
+# print('Input Plaintext: ', end='')
+# plainText = input()
+# print()
 
-res = encrypt(plainText, key)
-print('\nCiphertext: ', res)
+# res = encrypt(plainText, key)
+# print('\nCiphertext: ', res)

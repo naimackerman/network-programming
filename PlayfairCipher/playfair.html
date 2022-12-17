@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Playfair cipher</title>
+    <!-- Bootscrap Core CSS and JS -->
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Pyscript -->
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+    <!-- style -->
+    <style type="text/css">
+      th,
+      td {
+        padding: 10px;
+      }
+      textarea {
+        resize: none;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- nav bar begins -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">KIJ</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="#">Playfair Cipher</a>
+            <a class="nav-link" href="#">Other Cipher</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- nav bar ends -->
+
+    <!-- actual content -->
+    <div class="container mt-4">
+      <div class="p-5 mb-4" style="background-color: antiquewhite; border-radius: 20px">
+        <h1>Playfair Cipher</h1>
+        <br />
+
+        <form id="myForm" method="post">
+          <table cellpadding="10">
+            <!-- get keyword -->
+            <tr>
+              <td>
+                <label for="keyword">Keyword: </label>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="keyword"
+                  id="keyword"
+                  size="50"
+                  onchange="Table.value=makeTableau(keyword.value)"
+                />
+              </td>
+            </tr>
+
+            <!-- Table -->
+            <tr>
+              <td><label for="Table">Table: </label></td>
+              <td>
+                <textarea
+                  style="font-family: monospace; font-size: 20px"
+                  rows="6"
+                  name="Table"
+                  cols="10"
+                  readonly
+                ></textarea>
+              </td>
+            </tr>
+
+            <!-- get message -->
+            <tr>
+              <td><label for="message">Plaintext: </label></td>
+              <td><textarea rows="4" cols="25" name="plainText" id="plainText"></textarea></td>
+            </tr>
+
+            <!-- submit button -->
+            <tr>
+              <td></td>
+              <td>
+                <input
+                  class="btn btn-primary btn-sm"
+                  type="button"
+                  value="Encrypt!"
+                  id="encrypt"
+                  pys-onClick="encrypt"
+                />
+              </td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td><label for="plainDigraphLabel">Plaintext Digraph: </label></td>
+              <td>
+                <div id="plainDigraph" style="font-family: monospace"></div>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="resultantMsg">Ciphertext: </label></td>
+              <td>
+                <div id="ciphertext" style="font-family: monospace"></div>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="test">Test str: </label></td>
+              <td>
+                <div id="test" style="font-family: monospace"></div>
+              </td>
+            </tr>
+          </table>
+        </form>
+
+        <br /><br />
+        * - J is considered equivalent to I
+        <br />
+      </div>
+    </div>
+    <py-script src="playfairCipher.py"></py-script>
+  </body>
+</html>
