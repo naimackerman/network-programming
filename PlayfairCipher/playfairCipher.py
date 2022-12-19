@@ -3,23 +3,24 @@ import math
 
 
 def encrypt(*args, **kwargs):
+    # Get plainText and keywors
     plainText = Element('plainText').element.value
     key = Element('keyword').element.value
 
     alphabets = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
 
-    # Make uppercase
+    # Make plainText and keyword uppercase
     plainText = plainText.upper()
     key = key.upper()
 
-    # Replace non-word dan digit
+    # Replace any character except alphabet
     plainText = re.sub(r'[^a-zA-Z]+', '', plainText)
     key = re.sub(r'[^a-zA-Z]+', '', key)
 
-    # Replace J
+    # Replace J with I
     key = key.replace('J', 'I')
 
-    # Check both characters same, indent letter X to seperate them
+    # Check if both characters same, indent letter X to seperate them
     for i in range(0, len(plainText), 2):
         letter1 = plainText[i]
         letter2 = ''
@@ -47,14 +48,14 @@ def encrypt(*args, **kwargs):
 
         # While duplicate letter found
         while pos > -1:
-            # Delete duplicate letter in the middle
+            # Delete duplicate letter which in the middle
             str = str[0:pos] + str[pos+1:len(str)]
-            # Check if duplicate letter still found
+            # Check if duplicate letter are still found
             pos = str.find(letter, i + 1)
 
     print('str -> ', str)
 
-    # Create 5x5 table
+    # Create 5x5 key table
     row = [['' for x in range(5)] for y in range(5)]
     for i in range(5):
         row[i] = ''
@@ -69,7 +70,7 @@ def encrypt(*args, **kwargs):
         table += '|' + row[i] + '|' + '\n'
 
     Element('keyTable').element.innerHTML = table
-
+    
     print('array: ')
     for i in range(5):
         print('|' + row[i] + '|')
@@ -79,8 +80,9 @@ def encrypt(*args, **kwargs):
     result = ''
     for i in range(0,  len(plainText), 2):
         # Example:
+        # keyword -> indonesia negara kaya dan jaya
         # plaintext -> GO OD BR OY OM SY SW EY EP CL EA NY
-        # Str ->
+        # table, will be ->
         # I N D O E
         # S A G R K
         # Y B C F H
@@ -90,14 +92,20 @@ def encrypt(*args, **kwargs):
         pos1 = str.find(plainText[i])  # G -> 7
         pos2 = str.find(plainText[i + 1])  # O -> 3
 
+        # Get X and Y coordinate
         x1 = pos1 % 5  # 7 % 5 = 2
         y1 = math.floor(pos1 / 5)  # 7 / 5 = 1
         x2 = pos2 % 5  # 3 % 5 = 3
         y2 = math.floor(pos2 / 5)  # 3 / 5 = 0
 
-        # If heights (y) are same, shift to right 1 point
-        # else If lengths (x) are same, shift to right 1 point
-        # else swap two x
+        # x1 = 2, y1 = 1
+        # x2 = 3, y2 = 0
+        # row[2][1] -> G
+        # row[3][0] -> )
+
+        # If y coordinate (y) are same, shift to right 1 point
+        # else If x coordinate (x) are same, shift to bottom 1 point
+        # else swap x1 and x2
 
         if y1 == y2:
             x1 = (x1 + shift) % 5
@@ -112,11 +120,12 @@ def encrypt(*args, **kwargs):
 
         # x1 = 3, y1 = 1
         # x2 = 2, y2 = 0
-        # row[1][3] -> R
-        # row[0][2] -> D
+        # row[3][1] -> R
+        # row[2][0] -> D
 
         result += row[y1][x1] + row[y2][x2]
 
+    # Display plain diagraph
     msg = ''
     for i in range(len(plainText)):
         msg += plainText[i]
@@ -125,6 +134,7 @@ def encrypt(*args, **kwargs):
 
     Element('plainDigraph').element.innerHTML = msg
 
+    # Display final result / ciphertext
     finalResult = ''
     for i in range(len(result)):
         finalResult += result[i]
