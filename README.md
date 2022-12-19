@@ -24,6 +24,8 @@ The program will display a After initial permutation text, Trace of data, and Ci
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/61086300/208414310-c2b0be7f-2071-4228-91fd-a1dd03bd3263.png" width="400" height="400" />
+</p>
+<p align="center">
 <img src="https://user-images.githubusercontent.com/61086300/208414472-446a9201-31d2-48af-b364-fabf48153c84.png" width="400" height="400" />
 </p>
 
