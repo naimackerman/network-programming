@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DES - ECB</title>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- Bootstrap CSS -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous"
+		></script>
+
+		<!-- Google Font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@300;400;500;700;900&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- Pyscript -->
+		<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+		<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+		<!-- style -->
+		<style type="text/css">
+			* {
+				font-family: "Yantramanav", sans-serif;
+			}
+			th,
+			td {
+				padding: 10px;
+			}
+			textarea {
+				resize: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- nav bar begins -->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container-fluid ml-4" style="font-size: large">
+				<a class="navbar-brand" href="#">KIJ</a>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav">
+						<a class="nav-link" href="/PlayfairCipher/playfair.html"
+							>Playfair Cipher</a
+						>
+						<a class="nav-link" href="/SHA1/sha1.html">SHA1 Hash</a>
+                        <a
+							class="nav-link active"
+							aria-current="page"
+							href="/DES-ECB/des.html"
+							>DES - ECB</a
+						>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<!-- nav bar ends -->
+
+		<!-- actual content -->
+		<div class="container mt-4" style="font-size: 700">
+			<div
+				class="p-5 mb-4"
+				style="background-color: antiquewhite; border-radius: 20px"
+			>
+				<h1 style="font-weight: bold; font-size: xx-large">
+					Data Encryption Standard - Electronic Codebook Mode
+				</h1>
+				<br />
+                <div id="myRadioGroup">
+                    Encryption <input type="radio" name="tipes" checked="checked" value="1"  />
+                    Decryption <input type="radio" name="tipes" value="2" />
+                
+                    <br />
+                    <br />
+                    <div id="tipe1" class="desc">
+                        <form id="myForm1" method="post">
+                            <table cellpadding="10">
+                                <!-- get plaintext -->
+                                <tr>
+                                    <td><label for="plaintext1">Plaintext: </label></td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            name="plaintext1"
+                                            id="plaintext1"
+                                            size="50"
+                                            maxlength="16"
+                                        />
+                                    </td>
+                                </tr>
+        
+                                <!-- get key -->
+                                <tr>
+                                    <td><label for="key1">Key: </label></td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            name="key1"
+                                            id="key1"
+                                            size="50"
+                                            maxlength="16"
+                                        />
+                                    </td>
+                                </tr>
+
+                                <!-- submit button -->
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <input
+                                            class="btn btn-primary btn-sm"
+                                            type="button"
+                                            value="Encrypt"
+                                            id="encrypt"
+                                            pys-onClick="encrypt"
+                                        />
+                                    </td>
+                                    <td></td>
+                                </tr>
+
+                                <!-- get After Initial Permutation -->
+                                <tr>
+                                    <td><label for="after1">After Initial Permutation: </label></td>
+                                    <td>
+                                        <textarea
+                                            type="text"
+                                            name="after1"
+                                            id="after1"
+                                            rows="1"
+									        cols="50"
+                                            readonly="true"
+                                        ></textarea>
+                                    </td>
+                                </tr>
+
+                                <!-- get round -->
+                                <tr>
+                                    <td><label for="trace1">Trace of Data: </label></td>
+                                    <td>
+                                        <textarea
+                                            style="
+                                                font-family: monospace;
+                                                font-size: 20px;
+                                            "
+                                            rows="16"
+                                            id="trace1"
+                                            name="trace1"
+                                            cols="50"
+                                            readonly
+                                        ></textarea>
+                                    </td>
+                                </tr>
+        
+                                <!-- get ciphertext -->
+                                <tr>
+                                    <td><label for="ciphertext1">Ciphertext: </label></td>
+                                    <td>
+                                        <textarea
+                                            type="text"
+                                            name="ciphertext1"
+                                            id="ciphertext1"
+                                            rows="1"
+									        cols="50"
+                                            readonly="true"
+                                        ></textarea>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div id="tipe2" class="desc" style="display: none;">
+                        <form id="myForm2" method="post">
+                            <table cellpadding="10">
+                                <!-- get plaintext -->
+                                <tr>
+                                    <td><label for="ciphertext2">Ciphertext: </label></td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            name="ciphertext2"
+                                            id="ciphertext2"
+                                            size="50"
+                                        />
+                                    </td>
+                                </tr>
+        
+                                <!-- get key -->
+                                <tr>
+                                    <td><label for="key2">Key: </label></td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            name="key2"
+                                            id="key2"
+                                            size="50"
+                                        />
+                                    </td>
+                                </tr>
+
+                                <!-- submit button -->
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <input
+                                            class="btn btn-primary btn-sm"
+                                            type="button"
+                                            value="Decrypt"
+                                            id="decrypt"
+                                            pys-onClick="decrypt"
+                                        />
+                                    </td>
+                                    <td></td>
+                                </tr>
+
+                                <!-- get After Initial Permutation -->
+                                <tr>
+                                    <td><label for="after2">After Initial Permutation: </label></td>
+                                    <td>
+                                        <textarea
+                                            type="text"
+                                            name="after2"
+                                            id="after2"
+                                            rows="1"
+									        cols="50"
+                                            readonly="true"
+                                        ></textarea>
+                                    </td>
+                                </tr>
+
+                                <!-- get round -->
+                                <tr>
+                                    <td><label for="trace2">Trace of Data: </label></td>
+                                    <td>
+                                        <textarea
+                                            style="
+                                                font-family: monospace;
+                                                font-size: 20px;
+                                            "
+                                            rows="16"
+                                            id="trace2"
+                                            name="trace2"
+                                            cols="50"
+                                            readonly
+                                        ></textarea>
+                                    </td>
+                                </tr>
+        
+                                <!-- get ciphertext -->
+                                <tr>
+                                    <td><label for="plaintext2">Plaintext: </label></td>
+                                    <td>
+                                        <textarea
+                                            type="text"
+                                            name="plaintext2"
+                                            id="plaintext2"
+                                            rows="1"
+									        cols="50"
+                                            readonly="true"
+                                        ></textarea>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<py-script src="des.py"></py-script>
+	</body>
+</html>
+<script>
+    $(document).ready(function() {
+        $("input[name$='tipes']").click(function() {
+            var test = $(this).val();
+    
+            $("div.desc").hide();
+            $("#tipe" + test).show();
+        });
+    });
+</script>
