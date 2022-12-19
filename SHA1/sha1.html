@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Playfair cipher</title>
+		<title>SHA1 Hash</title>
 		<!-- Required meta tags -->
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -52,13 +52,15 @@
 				<a class="navbar-brand" href="#">KIJ</a>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
+						<a class="nav-link" href="/PlayfairCipher/playfair.html"
+							>Playfair Cipher</a
+						>
 						<a
 							class="nav-link active"
 							aria-current="page"
-							href="/PlayfairCipher/playfair.html"
-							>Playfair Cipher</a
+							href="/SHA1/sha1.html"
+							>SHA1 Hash</a
 						>
-						<a class="nav-link" href="/SHA1/sha1.html">SHA1 Hash</a>
 					</div>
 				</div>
 			</div>
@@ -72,27 +74,12 @@
 				style="background-color: antiquewhite; border-radius: 20px"
 			>
 				<h1 style="font-weight: bold; font-size: xx-large">
-					Playfair Cipher
+					SHA1 Cipher
 				</h1>
 				<br />
 
 				<form id="myForm" method="post">
 					<table cellpadding="10">
-						<!-- get keyword -->
-						<tr>
-							<td>
-								<label for="keyword">Keyword: </label>
-							</td>
-							<td>
-								<input
-									type="text"
-									name="keyword"
-									id="keyword"
-									size="50"
-								/>
-							</td>
-						</tr>
-
 						<!-- get message -->
 						<tr>
 							<td><label for="message">Plaintext: </label></td>
@@ -113,9 +100,9 @@
 								<input
 									class="btn btn-primary btn-sm"
 									type="button"
-									value="Encrypt!"
-									id="encrypt"
-									pys-onClick="encrypt"
+									value="Hash!"
+									id="hash"
+									pys-onClick="sha1"
 								/>
 							</td>
 							<td></td>
@@ -123,48 +110,23 @@
 
 						<!-- Key Table -->
 						<tr>
-							<td><label for="keyTable">Table: </label></td>
+							<td>
+								<label for="hash_result">Has Result: </label>
+							</td>
 							<td>
 								<textarea
-									style="
-										font-family: monospace;
-										font-size: 20px;
-									"
-									rows="6"
-									id="keyTable"
-									name="keyTable"
-									cols="10"
+									name="hashResult"
+									id="hashResult"
+									cols="50"
+									rows="4"
 									readonly
 								></textarea>
 							</td>
 						</tr>
-
-						<tr>
-							<td>
-								<label for="plainDigraphLabel"
-									>Plaintext Digraph:
-								</label>
-							</td>
-							<td>
-								<div id="plainDigraph"></div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label for="resultantMsg">Ciphertext: </label>
-							</td>
-							<td>
-								<div id="ciphertext"></div>
-							</td>
-						</tr>
 					</table>
 				</form>
-
-        <br /><br />
-        <small class="ml-3"> Note: J is considered equivalent to I </small>
-        <br />
-      </div>
-    </div>
-    <py-script src="playfairCipher.py"></py-script>
-  </body>
+			</div>
+		</div>
+		<py-script src="sha1.py"></py-script>
+	</body>
 </html>
